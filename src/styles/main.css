@@ -93,3 +93,12 @@
       margin-bottom: 40px;
     }
   }
+
+/* Common */
+
+.freelancehunt-img {
+    /* position: relative; */
+    /* top: 40px; */
+    width: 40px;
+    border-radius: 45%;
+  }

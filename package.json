@@ -1,23 +1,32 @@
 {
-  "name": "vue-portfolio",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.7.2",
-    "gsap": "^3.12.7",
-    "vue": "^3.5.13"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/tsconfig": "^0.7.0",
-    "typescript": "~5.7.2",
-    "vite": "^6.2.0",
-    "vue-tsc": "^2.2.4"
-  }
+	"name": "vue-portfolio",
+	"homepage": "https://nbowisdar.github.io/vue-portfolio",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vue-tsc -b && vite build",
+		"preview": "vite preview",
+		"predeploy": "bun run build",
+		"deploy": "gh-pages -d dist"
+	},
+	"dependencies": {
+		"@fortawesome/fontawesome-free": "^6.7.2",
+		"@tanstack/vue-query": "^5.69.0",
+		"axios": "^1.8.4",
+		"date-fns": "^4.1.0",
+		"emailjs": "^4.0.3",
+		"emailjs-com": "^3.2.0",
+		"gh-pages": "^6.3.0",
+		"gsap": "^3.12.7",
+		"vue": "^3.5.13"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^5.2.1",
+		"@vue/tsconfig": "^0.7.0",
+		"typescript": "~5.7.2",
+		"vite": "^6.2.0",
+		"vue-tsc": "^2.2.4"
+	}
 }

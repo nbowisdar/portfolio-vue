@@ -34,17 +34,18 @@ onMounted(() => {
       <h2 class="section-title">About Me</h2>
       <div class="about-content">
         <div class="about-text">
-          <p>I'm a passionate Full Stack Developer with 5 years of experience creating modern web applications. I specialize in Vue.js, React, and responsive design principles.</p>
-          <p>My approach combines technical expertise with an eye for design, resulting in applications that are both functional and visually appealing.</p>
+          <p>Hey, I'm a Full Stack Web Developer. I've been building modern web applications for about five years now.</p>
+          <p>While I enjoy working on the front-end with things like Vue.js and React, making sure everything works smoothly behind the scenes – the backend stuff – is really where my passion lies. I like to think I can build things that not only look good but also work great.</p>
           <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a target="_blank" href="https://github.com/nbowisdar"><i class="fab fa-github"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/volodymyr-fedorets-189953207/"><i class="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://t.me/nbowisdar"><i class="fab fa-telegram"></i></a>
+            <a target="_blank" href="https://t.me/nbowisdar"><i class="fab fa-telegram"></i></a>
+            <a target="_blank" href="https://freelancehunt.com/freelancer/nbowisdar.html"><img class="freelancehunt-img" src="/freelancehunt-icon.png" alt="frelancehunt"></a>
           </div>
         </div>
         <div class="about-image">
-          <img src="https://via.placeholder.com/400x500" alt="About Me">
+          <img src="/m1.png" alt="About Me">
         </div>
       </div>
     </div>
@@ -72,6 +73,7 @@ onMounted(() => {
 }
 
 .social-links {
+  display: flex;
   margin-top: 30px;
 }
 

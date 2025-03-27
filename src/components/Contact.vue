@@ -2,9 +2,22 @@
 import { onMounted } from 'vue'
 import { gsap } from 'gsap'
 
+import emailjs from "emailjs-com";
+
+
 const submitForm = (e) => {
   e.preventDefault()
-  alert('Thank you for your message! I will get back to you soon.')
+  emailjs.sendForm(
+    import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        e.target,
+        import.meta.env.VITE_PUBLIC_KEY
+  ).then((result) => {
+    alert('Thank you for your message! I will get back to you soon.')      
+  }).catch((error) => {
+    console.log(error.text)
+    alert('Something went wrong. Please try again.')
+  })
   e.target.reset()
 }
 
@@ -39,21 +52,21 @@ onMounted(() => {
       <h2 class="section-title">Get In Touch</h2>
       <div class="contact-content">
         <form class="contact-form" @submit="submitForm">
-          <input type="text" placeholder="Volodymyr Fedorets" required>
-          <input type="email" placeholder="Your Email" required>
-          <textarea placeholder="Your Message" required></textarea>
+          <input name="from_name" type="text" placeholder="Your name" required>
+          <input name="email" type="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Your Message" required></textarea>
           <button type="submit" class="btn">Send Message</button>
         </form>
         <div class="contact-info">
-          <h3>Contact Information</h3>
-          <p><i class="fas fa-envelope"></i> your.email@example.com</p>
-          <p><i class="fas fa-phone"></i> (123) 456-7890</p>
-          <p><i class="fas fa-map-marker-alt"></i> Your City, Country</p>
+          <h3>Contact Information</h3> 
+          <p><i class="fas fa-envelope"></i> nbowisdar@gmail.com</p>
+          <p><i class="fa-brands fa-telegram"></i>@nbowisdar </p>
+          <p><i class="fas fa-map-marker-alt"></i> Kyiv, Ukraine</p>
           <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a target="_blank" href="https://github.com/nbowisdar"><i class="fab fa-github"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/volodymyr-fedorets-189953207/"><i class="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://t.me/nbowisdar"><i class="fab fa-telegram"></i></a>
+            <a target="_blank" href="https://freelancehunt.com/freelancer/nbowisdar.html"><img class="freelancehunt-img" src="/freelancehunt-icon.png" alt="frelancehunt"></a>
           </div>
         </div>
       </div>
@@ -122,9 +135,7 @@ onMounted(() => {
 }
 
 .contact-info i {
-  color: var(--primary);
   font-size: 1.2rem;
-  width: 25px;
 }
 
 .social-links {

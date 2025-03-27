@@ -55,7 +55,7 @@ onMounted(() => {
         <a href="#work" class="btn">View My Work</a>
       </div>
       <div class="hero-image float">
-        <img src="" alt="Volodymyr Fedorets">
+        <img src="/m2.jpg" alt="Volodymyr Fedorets">
       </div>
     </div>
   </section>
