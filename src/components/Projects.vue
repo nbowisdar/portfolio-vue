@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from "vue"
+import { onMounted, onBeforeUnmount, ref } from "vue"
 import { gsap } from "gsap"
 import { useQuery } from "@tanstack/vue-query"
 import axios from "axios"
@@ -17,6 +17,9 @@ interface GitHubRepo {
 	language: string
 }
 
+const projectsPerPage = ref(2)
+const isManualLoading = ref(false)
+
 const fetchProjects = async () => {
 	const { data } = await axios.get<GitHubRepo[]>(
 		"https://api.github.com/users/nbowisdar/repos",
@@ -24,7 +27,7 @@ const fetchProjects = async () => {
 			params: {
 				sort: "updated",
 				direction: "desc",
-				per_page: 4,
+				per_page: projectsPerPage.value,
 			},
 			headers: {
 				Accept: "application/vnd.github+json",
@@ -34,13 +37,27 @@ const fetchProjects = async () => {
 	return data
 }
 
-const { isLoading, isError, data, error } = useQuery({
+const { isLoading, isError, data, error, refetch } = useQuery({
 	queryKey: ["projects"],
 	queryFn: fetchProjects,
 })
 
+console.log(isLoading, "isLoading");
+console.log(isLoading, "FOOO");
+
+
 const formatDate = (dateString: string) => {
 	return format(new Date(dateString), "yyyy.MM.dd")
+}
+
+const loadMoreProjects = async () => {
+  isManualLoading.value = true
+  projectsPerPage.value += 2
+  try {
+    await refetch()
+  } finally {
+    isManualLoading.value = false
+  }
 }
 
 onMounted(async () => {
@@ -93,7 +110,7 @@ onBeforeUnmount(() => {
 
 			<div class="projects-grid">
 				<div v-for="project in data" :key="project.id" class="project-card">
-					<div class="project-info">
+					<div class="project-info ">
 						<h3>{{ project.name }}</h3>
 						<div class="project-date">
 							Created at: <span>{{ formatDate(project.created_at) }}</span>
@@ -131,8 +148,18 @@ onBeforeUnmount(() => {
 						</div>
 					</div>
 				</div>
-				<div>
-					<button class="btn">Load more</button>
+				<div class="load-more-div">
+					<button
+						v-if="data && data.length > 0"
+						@click="loadMoreProjects"
+						class="btn"
+						:disabled="isManualLoading"
+					>
+						<span v-if="!isManualLoading">Load more</span>
+						<span v-else class="loader-container">
+							<span class="loader"></span> Loading...
+						</span>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -140,6 +167,23 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+
+.loader-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: rotation 1s linear infinite;
+}
+
 .projects {
 	background-color: var(--light);
 	padding: 100px 0;
@@ -231,16 +275,14 @@ onBeforeUnmount(() => {
 .btn {
 	display: inline-block;
 	margin-top: 10px;
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    transition: background-position .5s;
+	background-size: 200% 100%;
+	background-position: 100% 0;
+	transition: background-position 0.5s;
 }
 
 .btn:hover {
-    background-position: 0 0;
+	background-position: 0 0;
 }
-
-
 
 @media (max-width: 768px) {
 	.projects {
@@ -254,5 +296,11 @@ onBeforeUnmount(() => {
 	.project-image {
 		height: 200px;
 	}
+}
+
+.load-more-div {
+	display: flex;
+	grid-column: 1 / -1;
+	justify-content: center;
 }
 </style>
