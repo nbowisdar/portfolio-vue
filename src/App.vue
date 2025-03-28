@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Header from './components/Header.vue'
+import Loading from './components/Loading.vue'
 import Hero from './components/Hero.vue'
 import About from './components/About.vue'
 import Projects from './components/Projects.vue'
@@ -34,6 +35,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <Loading />
   <Header :active-section="activeSection" />
   <main>
     <Hero id="home" />

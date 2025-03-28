@@ -19,7 +19,10 @@ const closeMenu = () => {
 <template>
   <header class="header">
     <div class="container">
-      <div class="logo">Portfolio</div>
+      <div class="logo">
+    <img class="urk-icon" src="/ukraine.png" alt="">
+        
+        Portfolio</div>
       <nav :class="{ 'active': mobileMenuOpen }">
         <ul>
           <li>
@@ -77,6 +80,10 @@ const closeMenu = () => {
   backdrop-filter: blur(10px);
 }
 
+.urk-icon {
+  width: 60px;
+}
+
 .header .container {
   display: flex;
   justify-content: space-between;
@@ -84,6 +91,9 @@ const closeMenu = () => {
 }
 
 .logo {
+  display: flex;
+  gap: 15px;
+  align-items: center;
   font-size: 1.8rem;
   font-weight: 700;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
