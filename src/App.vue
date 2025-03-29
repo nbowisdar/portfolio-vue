@@ -30,9 +30,6 @@ const handleScroll = () => {
   }
 }
 
-// onMounted(() => {
-//   window.addEventListener('scroll', handleScroll)
-// })
 
 const onLoadingReady = () => {
   showLoading.value = false

@@ -109,18 +109,6 @@ onMounted(() => {
 	height: 100vh;
 }
 
-.load-text input {
-  background-color: transparent;
-  border: none;
-  min-width: none;
-}
-
-.load-text input:focus {
-  background-color: transparent;
-  outline: none;
-  border: none;
-  box-shadow: none;
-}
 
 .terminal-sign {
   display: flex;
@@ -129,6 +117,15 @@ onMounted(() => {
 
 .fa-pizza-slice {
   color: rgb(184, 150, 56);
+}
+
+
+@media (max-width: 768px) {
+  .load-text {
+    font-size: large;
+    min-width: 300px;
+    margin: auto;
+  }
 }
 
 </style>

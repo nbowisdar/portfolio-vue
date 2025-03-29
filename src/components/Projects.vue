@@ -142,7 +142,7 @@ onBeforeUnmount(() => {
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									View Page
+									Open Page
 								</a>
 							</div>
 						</div>
@@ -287,6 +287,10 @@ onBeforeUnmount(() => {
 @media (max-width: 768px) {
 	.projects {
 		padding: 80px 0;
+	}
+
+	.project-links {
+		display: block;
 	}
 
 	.projects-grid {
