@@ -30,19 +30,23 @@ const handleScroll = () => {
   }
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
+// onMounted(() => {
+//   window.addEventListener('scroll', handleScroll)
+// })
 
 const onLoadingReady = () => {
   showLoading.value = false
+  window.addEventListener('scroll', handleScroll)
 }
 
 </script>
 
 <template>
-  <Loading v-if="showLoading" :on-ready="onLoadingReady" />
-  <Header :active-section="activeSection" />
+  <div v-if="showLoading">
+    <Loading :on-ready="onLoadingReady" />
+  </div>
+  <div v-else>
+    <Header :active-section="activeSection" />
   <main>
     <Hero id="home" />
     <About id="about" />
@@ -51,6 +55,8 @@ const onLoadingReady = () => {
     <Contact id="contact" />
   </main>
   <Footer />
+  </div>
+  
 </template>
 
 <style>
