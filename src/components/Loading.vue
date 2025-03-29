@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const { onReady} = defineProps<{
+  onReady: () => void
+}>()
+
 import { ref, onMounted, watch } from "vue"
 
 const isLoading = ref(true)
@@ -12,13 +16,14 @@ setInterval(() => {
 }, 500)
 
 watch(isLoading, () => {
-  console.log(isLoading.value, 'isLoading');
   if (!isLoading.value) {
     setTimeout(() => {
           textAfterTerminalSign.value = extractFromGoPrintln(textToShow.value)
     textToShow.value = ""
     }, 2000)
-
+    setTimeout(() => {
+      onReady()
+    }, 4000)
   }
 })
 

@@ -10,6 +10,7 @@ import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
 
 const activeSection = ref('home')
+const showLoading = ref(true)
 
 const handleScroll = () => {
   const sections = ['home', 'about', 'work', 'skills', 'contact']
@@ -32,10 +33,15 @@ const handleScroll = () => {
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
+
+const onLoadingReady = () => {
+  showLoading.value = false
+}
+
 </script>
 
 <template>
-  <Loading />
+  <Loading v-if="showLoading" :on-ready="onLoadingReady" />
   <Header :active-section="activeSection" />
   <main>
     <Hero id="home" />
